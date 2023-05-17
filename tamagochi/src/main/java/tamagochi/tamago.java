@@ -4,7 +4,7 @@ public class tamago {
     private String name = "";
     private Number age = 0;
     private Number hungerLevel = 0;
-    private Number funLevel = 0;
+    private Number funLevel = 15;
     private boolean sickness = false;
     private boolean dirty = false;
 
