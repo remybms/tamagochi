@@ -10,6 +10,7 @@ public class App
     {
         int choice = -1;
         Life life = new Life();
+        startCycling();
         do{
             choice = life.Menu();
             switch(choice){
