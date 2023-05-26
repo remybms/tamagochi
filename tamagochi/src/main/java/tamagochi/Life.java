@@ -36,10 +36,10 @@ public class Life {
     }
     public int Menu(){
         System.out.println("Veuillez choisir une option : ");
-        System.out.println("1. Lister les livres disponibles");
-        System.out.println("2. Ajouter un livre");
-        System.out.println("3. Emprunter un livre");
-        System.out.println("4. Restituer un livre");
+        System.out.println("1. Le nourrir");
+        System.out.println("2. Jouer avec lui");
+        System.out.println("3. Le nettoyer");
+        System.out.println("4. Le soigner");
         System.out.println("0. Quitter");
         return promptNumber("Faites un choix :");
     }
