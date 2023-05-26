@@ -1,5 +1,7 @@
 package tamagochi;
-import java.io.IOException;;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;;
 
 
 public class Life {
@@ -42,10 +44,27 @@ public class Life {
         return promptNumber("Faites un choix :");
     }
 
+    public static String prompt(String question){
+        System.out.print(question + " ");
+        InputStreamReader reader = new InputStreamReader(System.in);
+        BufferedReader buffer = new BufferedReader(reader);
+        try {
+            return buffer.readLine();
+        }
+        catch(IOException e){
+            System.out.println("Quelque chose s'est mal passé, recommencez");
+            return prompt(question);
+        }
+    }
+
     public static int promptNumber(String question){
         String answer = prompt(question);
         try {
             int numberAnswer = Integer.parseInt(answer);
+            if (numberAnswer < 0 || numberAnswer > 4){
+                System.out.println("Veuiullez taper un nombre entre 0 et 4");
+                return promptNumber(question);
+            }
             return numberAnswer;
         }
         catch(NumberFormatException e){
@@ -54,3 +73,4 @@ public class Life {
         }
         
     }
+}
