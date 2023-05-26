@@ -1,3 +1,7 @@
 public class funLevelCounter{
-    //pa lu
+    public static int maxNoFun = 4
+    public static void LvlCnt(){
+        
+    }
+  
 }
