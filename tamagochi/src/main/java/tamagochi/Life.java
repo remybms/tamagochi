@@ -22,22 +22,27 @@ public class Life {
 
     public void Heal() {
         tamagochi.sickness = false;
-        System.out.println("Il a été soigné");
+        System.out.println(tamagochi.name + " a été soigné");
     }
 
     public void Clean() {
         tamagochi.dirty = false;
-        System.out.println("Il a été nettoyé");
+        System.out.println(tamagochi.name + " a été nettoyé");
     }
 
     public void Feed() {
         if (tamagochi.hunger == true) {
             tamagochi.hunger = false;
-            System.out.println("Il a été nourri");
+            System.out.println(tamagochi.name + " a été nourri");
         } else {
-            System.out.println("Il n'a plus faim");
+            System.out.println(tamagochi.name + " n'a plus faim");
         }
     }
+
+    public void setName(String name){
+        tamagochi.name = name;
+    }
+
     public int Menu(){
         System.out.println("Veuillez choisir une option : ");
         System.out.println("1. Le nourrir");
@@ -112,11 +117,6 @@ public class Life {
                     adultAge++;
                 }
             }
-            try {
-                Thread.sleep(60 * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
-}
+}        
