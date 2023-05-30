@@ -12,7 +12,7 @@ public class CycleCounter {
         while (true) {
             System.out.println("Cycle " + (cycleCount + 1));
             cycleCount++;
-            funLevel-3;
+            funLevel -= 3;
             try {
                 Thread.sleep(durationInSeconds * 1000);
             } catch (InterruptedException e) {
