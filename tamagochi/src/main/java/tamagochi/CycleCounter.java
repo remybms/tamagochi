@@ -1,6 +1,7 @@
 package tamagochi;
 
 public class CycleCounter {
+    public static int valReset = 0;
     private static int cycleCount = 0;
 
     public static void main(String[] args) {
@@ -12,7 +13,12 @@ public class CycleCounter {
         while (true) {
             System.out.println("Cycle " + (cycleCount + 1));
             cycleCount++;
+<<<<<<< HEAD
             funLevel -= 3;
+=======
+            funLevel-3;
+            if tamago.hunger = 
+>>>>>>> enzo
             try {
                 Thread.sleep(durationInSeconds * 1000);
             } catch (InterruptedException e) {
