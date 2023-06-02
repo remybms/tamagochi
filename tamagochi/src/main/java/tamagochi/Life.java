@@ -82,12 +82,6 @@ public class Life {
         }
     }
 
-    public void die(){
-        if(hungerForAWhile == -25){
-            tamagochi.state = "dead";
-        }
-    }
-
     public void startCycling() {
         tamagochi.funLevel -= 3;
         if (tamagochi.hunger == true) {
@@ -99,7 +93,9 @@ public class Life {
             consecutiveEat++;
             hungerForAWhile = -5;
         }
-        die();
+        if(hungerForAWhile == -25){
+            tamagochi.state = "dead";
+        }
     }
 
     public void lifeCycling() {
