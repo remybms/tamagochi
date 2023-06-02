@@ -81,6 +81,13 @@ public class Life {
             return promptNumber(question);
         }
     }
+
+    public void die(){
+        if(hungerForAWhile == -25){
+            tamagochi.state = "dead";
+        }
+    }
+
     public void startCycling() {
         tamagochi.funLevel -= 3;
         if (tamagochi.hunger == true) {
@@ -92,6 +99,7 @@ public class Life {
             consecutiveEat++;
             hungerForAWhile = -5;
         }
+        die();
     }
 
     public void lifeCycling() {
@@ -99,12 +107,16 @@ public class Life {
             if (tamagochi.state == "child") {
                 if(tamagochi.funLevel >= 40 && consecutiveEat >= 4){
                     tamagochi.state = "adult";
+                    startCycling();
+                    adultAge++;
                 } else {
                     startCycling();
                 }
             } else if (tamagochi.state == "adult") {
                 if(adultAge == 15){
                     tamagochi.state = "aged";
+                    startCycling();
+                    adultAge++;
                 } else {
                     startCycling();
                     adultAge++;
