@@ -6,8 +6,9 @@ import java.util.TimerTask;
 public class commandLine {
     public static void main(String[] args) {
         int choice = -1;
+        Life life;
         do {
-            Life life = new Life();
+            life = new Life();
             life.setName(Life.prompt("Comment voulez-vous appeler votre nouveau tamagochi ?"));
             Timer timer = new Timer();
 
