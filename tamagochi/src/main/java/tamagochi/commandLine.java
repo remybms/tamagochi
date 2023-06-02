@@ -15,7 +15,6 @@ public class commandLine {
                 @Override
                 public void run() {
                     System.out.println("Une nouvelle journée commence");
-
                 }
             };
             timer.schedule(task, 0, 60000);
@@ -36,6 +35,7 @@ public class commandLine {
                         break;
                 }
             } while (choice != 0 && life.tamagochi.state != "dead");
+            timer.cancel();
         } while (choice != 0);
     }
 }
