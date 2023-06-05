@@ -6,19 +6,27 @@ import java.util.TimerTask;
 public class commandLine {
     public static void main(String[] args) {
         int choice = -1;
-        Life life;
         do {
-            life = new Life();
+            Life life = new Life();
             life.setName(Life.prompt("Comment voulez-vous appeler votre nouveau tamagochi ?"));
             Timer timer = new Timer();
 
-            TimerTask task = new TimerTask() {
+            class MyTimerTask extends TimerTask {
+                private Life currentLife;
+        
+                public MyTimerTask(Life life) {
+                    currentLife = life;
+                }
+        
                 @Override
                 public void run() {
                     System.out.println("Une nouvelle journée commence");
+                    currentLife.lifeCycling();
                 }
-            };
-            timer.schedule(task, 0, 60000);
+            }
+        
+            TimerTask task = new MyTimerTask(life);
+            timer.schedule(task, 0, 10000);
             do {
                 choice = life.Menu();
                 switch (choice) {
