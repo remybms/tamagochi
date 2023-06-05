@@ -21,12 +21,13 @@ public class commandLine {
                 @Override
                 public void run() {
                     System.out.println("Une nouvelle journée commence");
+                    currentLife.tamagochi.age++;
                     currentLife.lifeCycling();
                 }
             }
         
             TimerTask task = new MyTimerTask(life);
-            timer.schedule(task, 0, 10000);
+            timer.schedule(task, 0, 60000);
             do {
                 choice = life.Menu();
                 switch (choice) {
@@ -44,6 +45,7 @@ public class commandLine {
                         break;
                 }
             } while (choice != 0 && life.tamagochi.state != "dead");
+            System.out.println(life.tamagochi.name + " est décédé");
             timer.cancel();
         } while (choice != 0);
     }

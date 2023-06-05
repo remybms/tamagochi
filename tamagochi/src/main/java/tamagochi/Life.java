@@ -12,30 +12,55 @@ public class Life {
     private int adultAge = 0;
 
     public void Play() {
-        if (tamagochi.funLevel <= 47) {
-            tamagochi.funLevel += 3;
+        if (tamagochi.state == "egg") {
+            System.out.println(tamagochi.name + " n'est qu'un oeuf, patience...");
         } else {
-            tamagochi.funLevel = 50;
+            if (tamagochi.funLevel <= 47) {
+                tamagochi.funLevel += 3;
+            } else {
+                tamagochi.funLevel = 50;
+            }
+            System.out.println("Vous vous êtes bien amusés");
         }
-        System.out.println("Vous vous êtes bien amusés");
     }
 
     public void Heal() {
-        tamagochi.sickness = false;
-        System.out.println(tamagochi.name + " a été soigné");
+        if (tamagochi.state == "egg") {
+            System.out.println(tamagochi.name + " n'est qu'un oeuf, patience...");
+        } else {
+            if (tamagochi.sickness == false) {
+                System.out.println(tamagochi.name + " n'est pas malade");
+            } else {
+                tamagochi.sickness = false;
+                System.out.println(tamagochi.name + " a été soigné");
+            }
+        }
     }
 
     public void Clean() {
-        tamagochi.dirty = false;
-        System.out.println(tamagochi.name + " a été nettoyé");
+        if (tamagochi.state == "egg") {
+            System.out.println(tamagochi.name + " n'est qu'un oeuf, patience...");
+        } else {
+            if (tamagochi.dirty == false) {
+                System.out.println(tamagochi.name + " n'est pas sale");
+            } else {
+                tamagochi.dirty = false;
+                System.out.println(tamagochi.name + " a été nettoyé");
+            }
+
+        }
     }
 
     public void Feed() {
-        if (tamagochi.hunger == true) {
-            tamagochi.hunger = false;
-            System.out.println(tamagochi.name + " a été nourri");
+        if (tamagochi.state == "egg") {
+            System.out.println(tamagochi.name + "n'est qu'un oeuf, patience...");
         } else {
-            System.out.println(tamagochi.name + " n'a plus faim");
+            if (tamagochi.hunger == true) {
+                tamagochi.hunger = false;
+                System.out.println(tamagochi.name + " a été nourri");
+            } else {
+                System.out.println(tamagochi.name + " n'a plus faim");
+            }
         }
     }
 
@@ -82,23 +107,30 @@ public class Life {
 
     public void startCycling() {
         tamagochi.funLevel -= 3;
+        if(tamagochi.dirty == true){
+            tamagochi.funLevel -= 3;
+        }
         if (tamagochi.hunger == true) {
             tamagochi.funLevel -= hungerForAWhile;
             consecutiveEat = 0;
             hungerForAWhile -= 5;
         } else {
+            tamagochi.hunger = true;
             tamagochi.dirty = true;
             consecutiveEat++;
             hungerForAWhile = -5;
         }
-        if (hungerForAWhile == -25) {
+        if (hungerForAWhile == -25 || tamagochi.sickness == true) {
             tamagochi.state = "dead";
         }
     }
 
     public void lifeCycling() {
-        if (tamagochi.state == "child") {
+        if(tamagochi.age == 1){
+            tamagochi.state = "child";
+        }else if (tamagochi.state == "child") {
             if (tamagochi.funLevel >= 40 && consecutiveEat >= 4) {
+                System.out.println(tamagochi.name + " est devenu adulte");
                 tamagochi.state = "adult";
                 startCycling();
                 adultAge++;
@@ -107,8 +139,13 @@ public class Life {
             }
         } else if (tamagochi.state == "adult") {
             if (adultAge == 15) {
+                System.out.println(tamagochi.name + " est devenu vieux");
                 tamagochi.state = "aged";
                 startCycling();
+                if(Math.random() * (3 - 1) == 2){
+                    tamagochi.sickness = true;
+                    System.out.println(tamagochi.name + " est malade");
+                }
                 adultAge++;
             } else {
                 startCycling();
@@ -119,6 +156,10 @@ public class Life {
                 tamagochi.state = "dead";
             } else {
                 startCycling();
+                if(Math.random() * (3 - 1) == 2){
+                    tamagochi.sickness = true;
+                    System.out.println(tamagochi.name + " est malade");
+                }
                 adultAge++;
             }
         }

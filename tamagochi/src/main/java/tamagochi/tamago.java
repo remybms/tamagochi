@@ -7,6 +7,6 @@ public class tamago {
     public int funLevel = 15;
     public boolean sickness = false;
     public boolean dirty = false;
-
+    public int age = -1;
     
 }
