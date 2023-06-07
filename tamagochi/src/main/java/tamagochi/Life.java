@@ -1,8 +1,8 @@
 package tamagochi;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;;
-
 
 public class Life {
     tamago tamagochi = new tamago();
@@ -17,33 +17,41 @@ public class Life {
         } else {
             tamagochi.funLevel = 50;
         }
+        System.out.print("\033[H\033[2J");
         System.out.println("Vous vous êtes bien amusés");
     }
 
     public void Heal() {
         tamagochi.sickness = false;
+        System.out.print("\033[H\033[2J");
         System.out.println(tamagochi.name + " a été soigné");
     }
 
     public void Clean() {
         tamagochi.dirty = false;
+        System.out.print("\033[H\033[2J");
         System.out.println(tamagochi.name + " a été nettoyé");
     }
 
     public void Feed() {
         if (tamagochi.hunger == true) {
             tamagochi.hunger = false;
+            System.out.print("\033[H\033[2J");
             System.out.println(tamagochi.name + " a été nourri");
         } else {
+            System.out.print("\033[H\033[2J");
             System.out.println(tamagochi.name + " n'a plus faim");
         }
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         tamagochi.name = name;
     }
 
-    public int Menu(){
+    public int Menu() {
+        System.out.println();
+        // System.out.println("Jour : " + counter);
+
         System.out.println("Veuillez choisir une option : ");
         System.out.println("1. Le nourrir");
         System.out.println("2. Jouer avec lui");
@@ -53,34 +61,33 @@ public class Life {
         return promptNumber("Faites un choix :");
     }
 
-    public static String prompt(String question){
+    public static String prompt(String question) {
         System.out.print(question + " ");
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader buffer = new BufferedReader(reader);
         try {
             return buffer.readLine();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Quelque chose s'est mal passé, recommencez");
             return prompt(question);
         }
     }
 
-    public static int promptNumber(String question){
+    public static int promptNumber(String question) {
         String answer = prompt(question);
         try {
             int numberAnswer = Integer.parseInt(answer);
-            if (numberAnswer < 0 || numberAnswer > 4){
+            if (numberAnswer < 0 || numberAnswer > 4) {
                 System.out.println("Veuiullez taper un nombre entre 0 et 4");
                 return promptNumber(question);
             }
             return numberAnswer;
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Veuillez saisir un nombre valide.");
             return promptNumber(question);
         }
     }
+
     public void startCycling() {
         tamagochi.funLevel -= 3;
         if (tamagochi.hunger == true) {
@@ -95,28 +102,27 @@ public class Life {
     }
 
     public void lifeCycling() {
-        while (true) {
-            if (tamagochi.state == "child") {
-                if(tamagochi.funLevel >= 40 && consecutiveEat >= 4){
-                    tamagochi.state = "adult";
-                } else {
-                    startCycling();
-                }
-            } else if (tamagochi.state == "adult") {
-                if(adultAge == 15){
-                    tamagochi.state = "aged";
-                } else {
-                    startCycling();
-                    adultAge++;
-                }
-            } else if (tamagochi.state == "aged") {
-                if(adultAge == 20){
-                    tamagochi.state = "dead";
-                } else {
-                    startCycling();
-                    adultAge++;
-                }
+        if (tamagochi.state == "child") {
+            if (tamagochi.funLevel >= 40 && consecutiveEat >= 4) {
+                tamagochi.state = "adult";
+            } else {
+                startCycling();
+            }
+        } else if (tamagochi.state == "adult") {
+            if (adultAge == 15) {
+                tamagochi.state = "aged";
+            } else {
+                startCycling();
+                adultAge++;
+            }
+        } else if (tamagochi.state == "aged") {
+            if (adultAge == 20) {
+                tamagochi.state = "dead";
+            } else {
+                startCycling();
+                adultAge++;
             }
         }
+
     }
-}        
+}
