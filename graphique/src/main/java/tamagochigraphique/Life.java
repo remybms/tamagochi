@@ -1,4 +1,4 @@
-package tamagochi;
+package tamagochigraphique;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class Life {
 
     public void Feed() {
         if (tamagochi.state == "egg") {
-            System.out.println(tamagochi.name + "n'est qu'un oeuf, patience...");
+            System.out.println(tamagochi.name + " n'est qu'un oeuf, patience...");
         } else {
             if (tamagochi.hunger == true) {
                 tamagochi.hunger = false;

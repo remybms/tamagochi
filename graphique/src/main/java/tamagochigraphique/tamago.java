@@ -1,4 +1,4 @@
-package tamagochi;
+package tamagochigraphique;
 
 public class tamago {
     public String name = "";

@@ -1,4 +1,4 @@
-package tamagochi;
+package tamagochigraphique;
 
 import java.util.Timer;
 import java.util.TimerTask;
