@@ -60,7 +60,7 @@ public class App extends Application {
         setName.setOnMouseClicked(e -> {
             life.tamagochi.name = textField.getText();
             stage.setScene(gameScene);
-            timer.schedule(task, 0, 5000);
+            timer.schedule(task, 0, 60000);
         });
         stage.setScene(nameScene);
         stage.show();
