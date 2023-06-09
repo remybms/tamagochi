@@ -1,8 +1,13 @@
 package tamagochigraphique;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;;
 
 public class Life {
     tamago tamagochi = new tamago();
@@ -74,7 +79,7 @@ public class Life {
         System.out.println("2. Jouer avec lui");
         System.out.println("3. Le nettoyer");
         System.out.println("4. Le soigner");
-        System.out.println("0. Quitter");
+        System.out.println("0. Sauvergarder et quitter");
         return promptNumber("Faites un choix :");
     }
 
@@ -163,5 +168,38 @@ public class Life {
                 adultAge++;
             }
         }
+    }
+
+    public static void sauvegarderTamagotchi(tamago tamagotchi, String fichier) {
+        try {
+            File file = new File(fichier);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                FileOutputStream fileOut = new FileOutputStream(fichier);
+                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+                objectOut.writeObject(tamagotchi);
+                objectOut.close();
+                fileOut.close();
+                System.out.println("Tamagotchi sauvegardé avec succès.");
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la sauvegarde du tamagotchi : " + e.getMessage());
+        }
+    }
+
+    public static tamago chargerTamagotchi(String fichier) {
+        tamago tamagotchi = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(fichier);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            tamagotchi = (tamago) objectIn.readObject();
+            objectIn.close();
+            fileIn.close();
+            System.out.println("Tamagotchi chargé avec succès.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erreur lors du chargement du tamagotchi : " + e.getMessage());
+        }
+        return tamagotchi;
     }
 }
