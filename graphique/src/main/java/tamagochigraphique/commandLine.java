@@ -45,7 +45,7 @@ public class commandLine {
                         break;
                 }
             } while (choice != 0 && life.tamagochi.state != "dead");
-            System.out.println(life.tamagochi.name + " est décédé");
+            Life.sauvegarderTamagotchi(life.tamagochi, null);
             timer.cancel();
         } while (choice != 0);
     }

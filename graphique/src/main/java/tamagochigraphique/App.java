@@ -53,6 +53,7 @@ public class App extends Application {
             life.Heal();
         });
         quit.setOnMouseClicked(e -> {
+            Life.sauvegarderTamagotchi(life.tamagochi, null);
             timer.cancel();
             stage.close();
         });
