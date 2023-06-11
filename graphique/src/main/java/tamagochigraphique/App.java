@@ -31,8 +31,9 @@ public class App extends Application {
         Button cleanButton = new Button("Nettoyer");
         Button healButton = new Button("Soigner");
         Button quit = new Button("Quitter");
+        Label label = new Label("")
         VBox gameBox = new VBox();
-        gameBox.getChildren().addAll(feedButton, playButton, cleanButton, healButton, quit);
+        gameBox.getChildren().addAll(feedButton, playButton, cleanButton, healButton, quit, label);
         Button setName = new Button("Valider");
         TextField textField = new TextField();
         textField.setText("entrer un nom pour votre tamagochi");
@@ -41,16 +42,32 @@ public class App extends Application {
         Scene gameScene = new Scene(gameBox, 400, 400);
         Scene nameScene = new Scene(nameBox, 400, 400);
         feedButton.setOnMouseClicked(e -> {
-            life.Feed();
+            if(life.tamagochi.hunger == false){
+                label.setText(life.tamagochi.name + " n'a pas faim");
+            } else {
+                life.Feed();
+                label.setText(life.tamagochi.name + " a bien mangé");
+            }
         });
         playButton.setOnMouseClicked(e -> {
             life.Play();
+            label.setText("Vous Vous êtes bien amusés");
         });
         cleanButton.setOnMouseClicked(e -> {
-            life.Clean();
+            if(life.tamagochi.dirty == false){
+                label.setText(life.tamagochi.name + " n'est pas sale");
+            } else {
+                life.Clean();
+                label.setText(life.tamagochi.name + " est tout propre maintenant");
+            }
         });
         healButton.setOnMouseClicked(e -> {
-            life.Heal();
+            if(life.tamagochi.sickness == false){
+                label.setText(life.tamagochi.name + " n'est pas malade");
+            } else {
+                life.Feed();
+                label.setText(life.tamagochi.name + " est guéri");
+            }
         });
         quit.setOnMouseClicked(e -> {
             Life.sauvegarderTamagotchi(life.tamagochi, null);
